@@ -4,7 +4,6 @@
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from pandora.pandora_models import DatabaseHelper, Movie
-import json
 import socket
 
 class MovieHandler(BaseHTTPRequestHandler):
