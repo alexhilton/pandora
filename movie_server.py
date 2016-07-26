@@ -21,7 +21,7 @@ class MovieHandler(BaseHTTPRequestHandler):
 
     def readAllMovies(self):
         movies = []
-        for m in Movie.select():
+        for m in Movie.select().order_by(Movie.date.desc()):
             mv = m.toJson()
             td = '<tr><td style="width: 20%; align: center">' + mv['title'] + '</td>'
             td += '<td style="width: 30%; align: center">' + mv['language'] + '/' + mv['country'] + '/' + mv['classification'] + '</td>'
