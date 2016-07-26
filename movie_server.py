@@ -5,6 +5,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from pandora.pandora_models import DatabaseHelper, Movie
 import json
+import socket
 
 class MovieHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -54,9 +55,18 @@ class MovieHandler(BaseHTTPRequestHandler):
                 </body>
                 </html>'''
 
+def findIPAddress():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("www.baidu.com", 80))
+    ip = s.getsockname()[0]
+    s.close()
+    return ip
+
+
 def main():
     server = HTTPServer(('', 8080), MovieHandler)
     print 'Welcome to pandora server'
+    print 'Visit ' + findIPAddress() + ':8080'
     print 'Press ^C once or twice to quit'
     server.serve_forever()
 
