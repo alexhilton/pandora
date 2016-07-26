@@ -23,11 +23,12 @@ class MovieHandler(BaseHTTPRequestHandler):
         movies = []
         for m in Movie.select().order_by(Movie.date.desc()):
             mv = m.toJson()
-            td = '<tr><td style="width: 20%; align: center">' + mv['title'] + '</td>'
+            td = '<tr><td style="width: 18%; align: center">' + mv['title'] + '</td>'
             td += '<td style="width: 30%; align: center">' + mv['language'] + '/' + mv['country'] + '/' + mv['classification'] + '</td>'
             td += '<td style="width: 30%; align: center">' + mv['introduction'] + '</td>'
             td += '<td style="align: center"><a href="' + mv['downloadUrl'] + '">Download Url</a></td>'
-            td += '<td style="align: center"><a href="' + mv['thunderTarget'] + '">Thunder Target</a></td></tr>'
+            td += '<td style="align: center"><a href="' + mv['thunderTarget'] + '">Thunder Target</a></td>'
+            td += '<td style="align: center">' + mv['date'] + '</td></tr>'
             movies.append(td)
 
         return ''.join(movies)
@@ -47,6 +48,7 @@ class MovieHandler(BaseHTTPRequestHandler):
                             <th>Introduction</th>
                             <th>Link</th>
                             <th>Thunder</th>
+                            <th>Date</th>
                         </tr>
                         <tr>'''
     def tailPart(self):

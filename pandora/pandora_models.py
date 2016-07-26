@@ -48,7 +48,7 @@ class Movie(Model):
         json['introduction'] = self.introduction
         json['downloadUrl'] = self.downloadUrl
         json['thunderTarget'] = self.thunderTarget
-        json['date'] = str(self.date.year) + str(self.date.month) + str(self.date.day)
+        json['date'] = '{0:04d}-{1:02d}-{2:02d}'.format(self.date.year, self.date.month, self.date.day)
         json['downloaded'] = self.downloaded
 
         return json
