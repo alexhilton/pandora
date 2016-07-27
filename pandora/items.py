@@ -31,6 +31,10 @@ class PandoraItem(scrapy.Item):
         return self['downloadUrl'].strip() is not ''
 
 
+    def hasMetaInfo(self):
+        # If 'title' is not empty and 'introduction' is not emtpy
+        return 'title' in self.keys() and 'introduction' in self.keys()
+
     def toMovie(self):
         movie = Movie(downloadUrl = self['downloadUrl'],
                      thunderTarget = self['thunderTarget'])
