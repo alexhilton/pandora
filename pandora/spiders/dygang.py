@@ -9,14 +9,14 @@ from pandora import patterns
 test = False
 
 PATTERN_MAP = {
-    'title': u'译\s+名\s+(.+)$',
-    'country': u'国\s+家\s+(.+)$',
-    'classification': u'类\s+别\s+(.+)$',
-    'language': u'语\s+言\s+(.+)$',
-    'publishYear': u'上映日期\s+(.+)$',
-    'doubanScore': u'豆瓣评分\s+([0-9.]+)',
-    'imdbScore': u'IMDb评分\s+([0-9.]+)',
-    'duration': u'片\s+长\s+(.+)$'
+    'title': [u'译\s+名\s+(.+)$'],
+    'country': [u'国\s+家\s+(.+)$', u'制片国家/地区:\s*(.+)$'],
+    'classification': [u'类\s+别\s+(.+)$', u'类型:\s*(.+)$'],
+    'language': [u'语\s+言\s+(.+)$', u'语言:\s*(.+)$'],
+    'publishYear': [u'上映日期\s+(.+)$', u'上映日期:\s*(.+)$'],
+    'doubanScore': [u'豆瓣评分\s+([0-9.]+)', u'豆瓣评分:\s*([0-9.]+)'],
+    'imdbScore': [u'IMDb评分\s+([0-9.]+)', u'IMDb链接:\s*([0-9.]+)'],
+    'duration': [u'片\s+长\s+(.+)$', u'片长:\s*(.+)$']
 }
 
 class DygodSpider(scrapy.Spider):
@@ -116,6 +116,8 @@ class DygodSpider(scrapy.Spider):
         lines = text.split('\n')
         for ln in lines:
             for key in PATTERN_MAP.keys():
-                mc = re.search(PATTERN_MAP[key], ln, re.UNICODE)
-                if mc is not None:
-                    item[key] = mc.group(1)
+                for ptn in PATTERN_MAP[key]:
+                    mc = re.search(ptn, ln, re.UNICODE)
+                    if mc is not None:
+                        item[key] = mc.group(1)
+                        break

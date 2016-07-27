@@ -27,7 +27,8 @@ class MovieHandler(BaseHTTPRequestHandler):
             td += '<td style="width: 30%; align: center">' + mv['introduction'] + '</td>'
             td += '<td style="align: center"><a href="' + mv['downloadUrl'] + '">Download Url</a></td>'
             td += '<td style="align: center"><a href="' + mv['thunderTarget'] + '">Thunder Target</a></td>'
-            td += '<td style="align: center">' + mv['date'] + '</td></tr>'
+            td += '<td style="align: center">' + mv['date'] + '</td>'
+            td += '<td style="align: center"><a href="' + mv['url'] + '">' + mv['url'] + '</a></td></tr>'
             movies.append(td)
 
         return ''.join(movies)
@@ -48,6 +49,7 @@ class MovieHandler(BaseHTTPRequestHandler):
                             <th>Link</th>
                             <th>Thunder</th>
                             <th>Date</th>
+                            <th>Link</th>
                         </tr>
                         <tr>'''
     def tailPart(self):
