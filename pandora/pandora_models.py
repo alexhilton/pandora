@@ -53,6 +53,61 @@ class Movie(Model):
 
         return json
 
+    def isBetterThan(self, another):
+        # Use a balance to weigh two object, if another has a field which self not, increment balance
+        # if another lack of a field which self has, decrement balance
+        # finally, if balance > 0, means another is better than self
+        balance = 0
+        if len(another.publishYear) > len(self.publishYear):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.country) > len(self.country):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.classification) > len(self.classification):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.language) > len(self.language):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.doubanScore) > len(self.doubanScore):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.imdbScore) > len(self.imdbScore):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.size) > len(self.size):
+            balance += 1
+        else:
+            balance -= 1
+        if len(another.duration) > len(self.duration):
+            balance += 1
+        else:
+            balance -= 1
+
+        return balance > 0
+
+    def updateWith(self, another):
+        self.url = another.url
+        self.title = another.title
+        self.publishYear = another.publishYear
+        self.country = another.country
+        self.classification = another.classification
+        self.language = another.language
+        self.doubanScore = another.doubanScore
+        self.imdbScore = another.imdbScore
+        self.size = another.size
+        self.duration = another.duration
+        self.introduction = another.introduction
+        self.downloadUrl = another.downloadUrl
+        self.thunderTarget = another.thunderTarget
+
 
     class Meta:
         database = DatabaseHelper.pandoraDB

@@ -16,6 +16,7 @@ class PandoraPipeline(object):
         self.added = 0
         self.notDownloadable = 0
         self.discarded = 0
+        self.updated = 0
 
         DatabaseHelper.initialize()
 
@@ -33,7 +34,12 @@ class PandoraPipeline(object):
             return
 
         try:
-            Movie.get(Movie.downloadUrl == item['downloadUrl'])
+            m = Movie.get(Movie.downloadUrl == item['downloadUrl'])
+            nm = item.toMovie()
+            if nm.isBetterThan(m):
+                self.updated += 1
+                m.updateWith(nm)
+
         except DoesNotExist:
             item.toMovie().save()
             self.added += 1
@@ -48,4 +54,5 @@ class PandoraPipeline(object):
         print 'Added: ' + str(self.added)
         print 'Discarded: ' + str(self.discarded)
         print 'Not downloadable: ' + str(self.notDownloadable)
-        print 'Existing: ' + str(self.totalCount - self.added - self.notDownloadable - self.discarded)
+        print 'Updated: ' + str(self.updated)
+        print 'Existing: ' + str(self.totalCount - self.added - self.notDownloadable - self.discarded - self.updated)
