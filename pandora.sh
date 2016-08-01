@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-spiders="dygod dygang"
+spiders="dygod dygang dy2018"
 
 for spdr in $spiders; do
     scrapy crawl $spdr
