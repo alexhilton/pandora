@@ -38,47 +38,47 @@ class PandoraItem(scrapy.Item):
     def toMovie(self):
         movie = Movie(downloadUrl = self['downloadUrl'],
                      thunderTarget = self['thunderTarget'])
-        if 'url' in self.keys():
+        if 'url' in self.keys() and self['url']:
             movie.url = self['url']
         else:
             movie.url = ''
-        if 'title' in self.keys():
+        if 'title' in self.keys() and self['title']:
             movie.title = self['title']
         else:
             movie.title = ''
-        if 'publishYear' in self.keys():
+        if 'publishYear' in self.keys() and self['publishYear']:
             movie.publishYear = self['publishYear']
         else:
             movie.publishYear = ''
-        if 'country' in self.keys():
+        if 'country' in self.keys() and self['country']:
             movie.country = self['country']
         else:
             movie.country = ''
-        if 'classification' in self.keys():
+        if 'classification' in self.keys() and self['classification']:
             movie.classification = self['classification']
         else:
             movie.classification = ''
-        if 'language' in self.keys():
+        if 'language' in self.keys() and self['language']:
             movie.language = self['language']
         else:
             movie.language = ''
-        if 'doubanScore' in self.keys():
+        if 'doubanScore' in self.keys() and self['doubanScore']:
             movie.doubanScore = self['doubanScore']
         else:
             movie.doubanScore = ''
-        if 'imdbScore' in self.keys():
+        if 'imdbScore' in self.keys() and self['imdbScore']:
             movie.imdbScore = self['imdbScore']
         else:
             movie.imdbScore = ''
-        if 'size' in self.keys():
+        if 'size' in self.keys() and self['size']:
             movie.size = self['size']
         else:
             movie.size = ''
-        if 'duration' in self.keys():
+        if 'duration' in self.keys() and self['duration']:
             movie.duration = self['duration']
         else:
             movie.duration = ''
-        if 'introduction' in self.keys():
+        if 'introduction' in self.keys() and self['introduction']:
             movie.introduction = self['introduction']
         else:
             movie.introduction = ''
